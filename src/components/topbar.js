@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import SearchInput from './searchInput';
 
-export default function Topbar() {
+export default function Topbar({ isGridView, setView, onChange }) {
   const [isSearch, setSearch] = React.useState(false);
   return (
     <Fragment>
@@ -39,7 +39,12 @@ export default function Topbar() {
           </div>
         </div>
         <div className='flex flex-row items-center'>
-          <div className='bg-concreteGrey dark:bg-codGray rounded-xl p-3 cursor-pointer'>
+          <div
+            className={`rounded-xl p-3 cursor-pointer ${
+              isGridView && 'bg-concreteGrey dark:bg-codGray'
+            }`}
+            onClick={() => setView(true)}
+          >
             <svg
               width='18'
               height='18'
@@ -82,7 +87,12 @@ export default function Topbar() {
               />
             </svg>
           </div>
-          <div className='rounded-xl p-3 mx-4  cursor-pointer'>
+          <div
+            className={`rounded-xl p-3 ml-4 sm:mx-4 cursor-pointer ${
+              !isGridView && 'bg-concreteGrey dark:bg-codGray'
+            }`}
+            onClick={() => setView(false)}
+          >
             <svg
               width='18'
               height='18'
@@ -99,7 +109,7 @@ export default function Topbar() {
           </div>
           <div className='hidden sm:block'>
             {isSearch ? (
-              <SearchInput classes='w-72 xl:w-96' />
+              <SearchInput classes='w-72 xl:w-96' onChange={onChange} />
             ) : (
               <div
                 className='bg-snowWhite dark:bg-onyxGrey rounded-xl p-3 cursor-pointer'
@@ -125,7 +135,10 @@ export default function Topbar() {
         </div>
       </div>
       <div className='block sm:hidden mt-3'>
-        <SearchInput classes='w-full bg-snowWhite' />
+        <SearchInput
+          classes='w-full bg-snowWhite dark:bg-codGray'
+          onChange={onChange}
+        />
       </div>
     </Fragment>
   );

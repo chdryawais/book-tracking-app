@@ -25,7 +25,7 @@ const ToggleButton = (props) => {
   };
 
   const toggleClasses = classNames(
-    'wrg-toggle',
+    'ml-7 wrg-toggle',
     {
       'wrg-toggle--checked': toggle,
       'wrg-toggle--disabled': disabled,

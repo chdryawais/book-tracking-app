@@ -1,0 +1,109 @@
+{
+  "data": [
+    {
+      "title": "Faith",
+      "author": "David Adams",
+      "rp": "72%",
+      "genre": "Fiction",
+      "image": "/images/book-1.png"
+    },
+    {
+      "title": "The World of Ice & Fire",
+      "author": "George R. R. Martin",
+      "rp": "42%",
+      "genre": "Fantasy",
+      "image": "/images/book-2.png"
+    },
+    {
+      "title": "The Power of Habit",
+      "author": "Charles Duhigg",
+      "rp": "12%",
+      "genre": "Education",
+      "image": "/images/book-3.png"
+    },
+    {
+      "title": "Wild Wisdom",
+      "author": "Neil Douglas-Klotz",
+      "rp": "100%",
+      "genre": "Adventure",
+      "image": "/images/book-4.png"
+    },
+    {
+      "title": "The Sky at Night: How to...",
+      "author": "Chris North & Paul Abel",
+      "rp": "54%",
+      "genre": "Science",
+      "image": "/images/book-5.png"
+    },
+    {
+      "title": "Into Thin Air",
+      "author": "Jon Krakauer",
+      "rp": "30%",
+      "genre": "Nature",
+      "image": "/images/book-6.png"
+    },
+    {
+      "title": "Humans",
+      "author": "Brandon Stanton",
+      "rp": "6%",
+      "genre": "Fantasy",
+      "image": "/images/book-7.png"
+    },
+    {
+      "title": "Wonders of the World",
+      "author": "Lonely Planet",
+      "rp": "90%",
+      "genre": "Education",
+      "image": "/images/book-8.png"
+    },
+    {
+      "title": "Paint a New Scene",
+      "author": "Deirdre O’Dare",
+      "rp": "54%",
+      "genre": "Romance",
+      "image": "/images/book-9.png"
+    },
+    {
+      "title": "Along the Enchanted Way",
+      "author": "William Blacker",
+      "rp": "18%",
+      "genre": "Travel",
+      "image": "/images/book-10.png"
+    },
+    {
+      "title": "A Court of Silver Flames",
+      "author": "Sarah J. Maas",
+      "rp": "36%",
+      "genre": "Fantasy",
+      "image": "/images/book-11.png"
+    },
+    {
+      "title": "The Sporades Sailing Pilot",
+      "author": "David Nairn",
+      "rp": "12%",
+      "genre": "Travel",
+      "image": "/images/book-12.png"
+    },
+    {
+      "title": "Empower Yourself",
+      "author": "Xenia Tchoumi",
+      "rp": "100%",
+      "genre": "Health & Well-Being",
+      "image": "/images/book-13.png"
+    },
+    {
+      "title": "Artistic Places",
+      "author": "Susie Hodge",
+      "rp": "36%",
+      "genre": "Adventure",
+      "image": "/images/book-14.png"
+    },
+    {
+      "title": "Fireheart Tiger",
+      "author": "Aliette De Bodard",
+      "rp": "0%",
+      "genre": "Fiction",
+      "image": "/images/book-15.png"
+    }
+  ]
+}

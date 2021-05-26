@@ -1,6 +1,5 @@
 import React from 'react';
-import Book1 from '../assets/images/book-1.png';
-export default function ListView({ openModal }) {
+export default function ListView({ openModal, list }) {
   return (
     <div>
       <table className='table-fixed w-full whitespace-nowrap rounded-lg bg-white dark:bg-black overflow-hidden'>
@@ -73,41 +72,49 @@ export default function ListView({ openModal }) {
           </tr>
         </thead>
         <tbody className=''>
-          <tr>
-            <td className='py-4'>
-              <div
-                className='flex items-center cursor-pointer'
-                onClick={openModal}
-              >
-                <div className='inline-flex w-14'>
-                  <img className='w-14 h-auto' alt='User avatar' src={Book1} />
-                </div>
-                <div className='pl-6'>
-                  <h1 className='font-inter font-semibold text-xl text-codGray dark:text-concreteGrey'>
-                    Faith
-                  </h1>
-                  <p className='font-inter font-medium text-base text-devilGrey dark:text-dustyGrey'>
-                    David Adams
+          {list.map((item, index) => {
+            return (
+              <tr>
+                <td className='py-4'>
+                  <div
+                    className='flex flex-row items-center cursor-pointer'
+                    onClick={() => openModal(item)}
+                  >
+                    <div className='w-14'>
+                      <img
+                        className='w-14 h-auto'
+                        alt='User avatar'
+                        src={item.image}
+                      />
+                    </div>
+                    <div className='pl-6 max-w-6 sm:max-w-full'>
+                      <h1 className='overflow-ellipsis font-inter font-semibold text-base sm:text-xl text-codGray dark:text-concreteGrey'>
+                        {item.title}
+                      </h1>
+                      <p className='font-inter font-medium text-base text-devilGrey dark:text-dustyGrey'>
+                        {item.author}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className='hidden md:table-cell py-4'>
+                  <p className='font-inter font-semibold text-base text-devilGrey dark:text-dustyGrey'>
+                    {item.genre}
                   </p>
-                </div>
-              </div>
-            </td>
-            <td className='hidden md:table-cell py-4'>
-              <p className='font-inter font-semibold text-base text-devilGrey dark:text-dustyGrey'>
-                Fiction
-              </p>
-            </td>
-            <td className='py-4'>
-              <p className='text-right md:text-left font-inter font-semibold text-base text-devilGrey dark:text-dustyGrey'>
-                72%
-              </p>
-            </td>
-            <td className='hidden md:table-cell py-4'>
-              <p className='font-inter font-semibold text-base text-devilGrey dark:text-dustyGrey'>
-                David Adams
-              </p>
-            </td>
-          </tr>
+                </td>
+                <td className='py-4'>
+                  <p className='text-right md:text-left font-inter font-semibold text-base text-devilGrey dark:text-dustyGrey'>
+                    {item.rp}
+                  </p>
+                </td>
+                <td className='hidden md:table-cell py-4'>
+                  <p className='font-inter font-semibold text-base text-devilGrey dark:text-dustyGrey'>
+                    3 weeks ago
+                  </p>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

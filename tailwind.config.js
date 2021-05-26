@@ -28,11 +28,14 @@ module.exports = {
         'white-0.16': 'rgba(255, 255, 255, 0.1666)',
         'black-0.6': 'rgba(0, 0, 0, 0.6666)',
         blue: '#2478F0',
+        shaftGrey: '#2D2D2D',
+        mercuryGrey: '#E1E1E1',
       },
       borderColor: {
         codGray: '#1E1E1E',
         concreteGrey: '#F0F0F0',
         mercuryGrey: '#E1E1E1',
+        shaftGrey: '#2D2D2D',
       },
       borderRadius: {
         18: '18px',
@@ -44,6 +47,12 @@ module.exports = {
       },
       width: {
         41: '41rem',
+      },
+      minHeight: {
+        screen: '100vh',
+      },
+      maxWidth: {
+        6: '6rem',
       },
     },
   },

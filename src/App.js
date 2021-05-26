@@ -1,101 +1,110 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Sidebar from './components/sidebar';
 import Topbar from './components/topbar';
 import GridView from './views/gridView';
 import ListView from './views/listView';
-import Modal from 'react-modal';
+import BookModal from './components/modal';
 import { ThemeContext } from './context/themeContext';
-import Book1 from './assets/images/book-1.png';
+import data from './data/data.json';
 
 function App() {
-  const { theme } = React.useContext(ThemeContext);
+  const { theme, setTheme } = React.useContext(ThemeContext);
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      border: 'none',
-      background: 'none',
-      marginTop: 100,
-    },
-    overlay: {
-      backgroundColor:
-        theme === 'dark' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(0, 0, 0, 0.75)',
-      overflow: 'auto',
-    },
-  };
+  const [isOpen, setIsOpen] = useState(false);
+  const [isGridView, setIsGridView] = useState(true);
+  const [list, setList] = useState([]);
+  const [fetchedList, setFetchedList] = useState([]);
+  const [bookDetail, setBook] = useState([]);
 
-  let [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    fetch('http://localhost:3004/data', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        setList(res);
+        setFetchedList(res);
+      });
+  }, []);
 
   function closeModal() {
     setIsOpen(false);
   }
 
-  function openModal() {
+  function openModal(book) {
+    setBook(book);
     setIsOpen(true);
   }
+
+  const _search = (value) => {
+    let text = value.toLowerCase();
+    // data.data only use for temporary data
+    if (text === '') {
+      setList(fetchedList);
+    } else {
+      let result = data.data.filter(
+        (item) =>
+          item.title.toLowerCase().includes(text) ||
+          item.author.toLowerCase().includes(text) ||
+          item.genre.toLowerCase().includes(text) ||
+          item.rp.includes(text)
+      );
+
+      setList(result);
+    }
+  };
+  const changeTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
   return (
     <>
-      <div className='flex flex-row'>
+      <div className='flex flex-row bg-white dark:bg-codGray'>
         <Sidebar />
-        <div className='w-full h-screen bg-white dark:bg-black px-8 pt-8'>
-          <Topbar />
-          <ListView openModal={openModal} />
-        </div>
-      </div>
-      <Modal isOpen={isOpen} style={customStyles}>
-        <div className='w-41 p-8 bg-white dark:bg-black m-auto rounded-6xl'>
-          <div className='flex justify-end'>
-            <div onClick={closeModal} className='cursor-pointer'>
+        <div className='w-full min-h-screen h-full border-l-2 border-gray-300 dark:border-black bg-white dark:bg-black'>
+          <div className='sm:hidden flex flex-row justify-end border-4 border-white dark:border-black bg-concreteGrey dark:bg-codGray'>
+            <div
+              className='flex items-center dark:bg-black rounded-xl p-3 h-12 m-1'
+              onClick={changeTheme}
+            >
               <svg
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
+                width='18'
+                height='18'
+                viewBox='0 0 18 18'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
-                className='fill-current text-silverGrey'
+                className='text-devilGrey dark:text-dustyGrey fill-current'
               >
                 <path
                   fill-rule='evenodd'
                   clip-rule='evenodd'
-                  d='M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75ZM12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24ZM12 13.591L9.0455 16.5455L7.4545 14.9545L10.409 12L7.4545 9.0455L9.0455 7.4545L12 10.409L14.9545 7.4545L16.5455 9.0455L13.591 12L16.5455 14.9545L14.9545 16.5455L12 13.591Z'
+                  d='M16.5 9C16.5 12.889 13.54 16.0867 9.75 16.463V1.53703C13.54 1.91332 16.5 5.11099 16.5 9ZM8.25 1.53703V16.463C4.46001 16.0867 1.5 12.889 1.5 9C1.5 5.11099 4.46001 1.91332 8.25 1.53703ZM9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18ZM15 9C15 11.6124 13.3304 13.8349 11 14.6586V3.34141C13.3304 4.16508 15 6.38756 15 9Z'
                 />
               </svg>
             </div>
           </div>
-          <div className='flex justify-center'>
-            <img src={Book1} alt='' />
-          </div>
-          <div className='flex flex-col pt-10'>
-            <h1 className='font-inter font-semibold text-3xl text-codGray dark:text-concreteGrey text-center'>
-              Faith
-            </h1>
-            <p className='font-inter font-medium text-lg text-devilGrey dark:text-dustyGrey text-center'>
-              David Adams
-            </p>
-          </div>
-          <div className='px-14 mt-5 mb-7'>
-            <p className='font-inter font-medium text-base text-darkcharcolGray dark:text-dustyGrey text-center'>
-              Hundreds of years before the Toralii attacked Earth, destroying
-              the cities of Beijing, Tehran and Sydney, before they developed
-              the voidwarp technology and destroyed their homeworld, they warred
-              amongst themselves.
-            </p>
-          </div>
-          <div className='flex flex-row justify-center'>
-            <button className='bg-snowWhite rounded-xl py-3 px-5 text-darkcharcolGray text-base font-inter font-medium mr-5'>
-              Close
-            </button>
-            <button className='bg-blue rounded-xl py-3 px-5 text-white text-base font-inter font-medium'>
-              Continue Reading
-            </button>
+          <div className='sm:hidden block h-1 bg-mercuryGrey dark:bg-shaftGrey' />
+          <div className='px-2 sm:px-8 pt-4'>
+            <Topbar
+              isGridView={isGridView}
+              setView={setIsGridView}
+              onChange={_search}
+            />
+            {isGridView ? (
+              <GridView list={list} openModal={openModal} />
+            ) : (
+              <ListView list={list} openModal={openModal} />
+            )}
           </div>
         </div>
-      </Modal>
+      </div>
+      <BookModal isOpen={isOpen} closeModal={closeModal} book={bookDetail} />
     </>
   );
 }

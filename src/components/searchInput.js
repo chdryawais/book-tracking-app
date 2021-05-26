@@ -1,6 +1,17 @@
 import React from 'react';
 
-export default function SearchInput({ classes }) {
+export default function SearchInput({ classes, onChange }) {
+  const [searchKey, setSearchKey] = React.useState('');
+  const handleChange = (e) => {
+    setSearchKey(e.target.value);
+  };
+  React.useEffect(() => {
+    if (searchKey) {
+      onChange(searchKey);
+    } else {
+      onChange('');
+    }
+  }, [searchKey]);
   return (
     <div
       className={`p-3 flex flex-row items-center border border-mercuryGrey rounded-xl ${classes}`}
@@ -23,6 +34,8 @@ export default function SearchInput({ classes }) {
         type='text'
         className='ml-3 w-full outline-none bg-transparent text-black dark:text-white'
         autoFocus
+        onChange={handleChange}
+        value={searchKey}
       />
       <svg
         width='24'
@@ -30,7 +43,8 @@ export default function SearchInput({ classes }) {
         viewBox='0 0 24 24'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
-        className='fill-current text-silverGrey'
+        className='fill-current text-silverGrey cursor-pointer'
+        onClick={() => setSearchKey('')}
       >
         <path
           fill-rule='evenodd'
